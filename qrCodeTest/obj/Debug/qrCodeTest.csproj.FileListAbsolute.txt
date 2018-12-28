@@ -1,0 +1,11 @@
+E:\CodeSomething\qrCodeTest\qrCodeTest\bin\Debug\qrCodeTest.exe
+E:\CodeSomething\qrCodeTest\qrCodeTest\bin\Debug\qrCodeTest.pdb
+E:\CodeSomething\qrCodeTest\qrCodeTest\bin\Debug\QRCoder.dll
+E:\CodeSomething\qrCodeTest\qrCodeTest\obj\Debug\qrCodeTest.csprojAssemblyReference.cache
+E:\CodeSomething\qrCodeTest\qrCodeTest\obj\Debug\qrCodeTest.Form1.resources
+E:\CodeSomething\qrCodeTest\qrCodeTest\obj\Debug\qrCodeTest.Properties.Resources.resources
+E:\CodeSomething\qrCodeTest\qrCodeTest\obj\Debug\qrCodeTest.csproj.GenerateResource.cache
+E:\CodeSomething\qrCodeTest\qrCodeTest\obj\Debug\qrCodeTest.csproj.CoreCompileInputs.cache
+E:\CodeSomething\qrCodeTest\qrCodeTest\obj\Debug\qrCodeTest.csproj.CopyComplete
+E:\CodeSomething\qrCodeTest\qrCodeTest\obj\Debug\qrCodeTest.exe
+E:\CodeSomething\qrCodeTest\qrCodeTest\obj\Debug\qrCodeTest.pdb
