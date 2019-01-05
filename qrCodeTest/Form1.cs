@@ -4,10 +4,12 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using QRCoder;
+//using static QRCoder.PayloadGenerator;
 
 namespace qrCodeTest
 {
@@ -20,10 +22,31 @@ namespace qrCodeTest
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            String str;
+            StreamReader sr = new StreamReader(Application.StartupPath + "\\test.txt", false);
+            str = sr.ReadToEnd().ToString();
+            sr.Close();
+
             QRCodeGenerator qrGenerator = new QRCodeGenerator();
-            QRCodeData qrCodeData = qrGenerator.CreateQrCode("The text which should be encoded.", QRCodeGenerator.ECCLevel.Q);
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode(str, QRCodeGenerator.ECCLevel.Q);
             QRCode qrCode = new QRCode(qrCodeData);
             Bitmap qrCodeImage = qrCode.GetGraphic(20);
+
+            //WiFi generator = new WiFi("TP-LINK_E802", "18005647653", WiFi.Authentication.nopass);
+            //string payload = generator.ToString();
+
+            //QRCodeGenerator qrGenerator = new QRCodeGenerator();
+            //QRCodeData qrCodeData = qrGenerator.CreateQrCode(payload, QRCodeGenerator.ECCLevel.Q);
+            //QRCode qrCode = new QRCode(qrCodeData);
+            //var qrCodeAsBitmap = qrCode.GetGraphic(20);
+
+            this.pictureBox1.Image = PictureChangeSize(qrCodeImage);
+        }
+
+
+        //改变图片尺寸，使其可以在picturebox中显示
+        private Bitmap PictureChangeSize(Bitmap qrCodeImage)
+        {
             int sourceWidth = qrCodeImage.Width;
             int sourceHeight = qrCodeImage.Height;
             float nPercent = 0;
@@ -49,7 +72,7 @@ namespace qrCodeTest
             g.DrawImage(qrCodeImage, 0, 0, destWidth, destHeight);
             g.Dispose();
 
-            this.pictureBox1.Image = b;
+            return b;
         }
     }
 }
