@@ -15,6 +15,13 @@ namespace qrCodeTest
 {
     public partial class Form1 : Form
     {
+        int preWidth;
+        int preHeight;
+        int preImageWidth;
+        int preImageHeight;
+
+        Bitmap qrCodeImage;
+
         public Form1()
         {
             InitializeComponent();
@@ -30,7 +37,7 @@ namespace qrCodeTest
             QRCodeGenerator qrGenerator = new QRCodeGenerator();
             QRCodeData qrCodeData = qrGenerator.CreateQrCode(str, QRCodeGenerator.ECCLevel.Q);
             QRCode qrCode = new QRCode(qrCodeData);
-            Bitmap qrCodeImage = qrCode.GetGraphic(20);
+            qrCodeImage = qrCode.GetGraphic(20);
 
             //WiFi generator = new WiFi("TP-LINK_E802", "18005647653", WiFi.Authentication.nopass);
             //string payload = generator.ToString();
@@ -73,6 +80,35 @@ namespace qrCodeTest
             g.Dispose();
 
             return b;
+        }
+
+        private void Form1_ResizeBegin(object sender, EventArgs e)
+        {
+            preWidth = this.Width;
+            preHeight = this.Height;
+
+            preImageHeight = pictureBox1.Height;
+            preImageWidth = pictureBox1.Width;
+        }
+
+        private void Form1_ResizeEnd(object sender, EventArgs e)
+        {
+            float nPercent = 0;
+            float nPercentW = 0;
+            float nPercentH = 0;
+
+            nPercentW = (float)this.Width / (float)preWidth;
+            nPercentH = (float)this.Height / (float)preHeight;
+
+            if (nPercentH < nPercentW)
+                nPercent = nPercentH;
+            else
+                nPercent = nPercentW;
+
+            pictureBox1.Height = (int)((float)preHeight * nPercent);
+            pictureBox1.Width = (int)((float)preWidth * nPercent);
+
+            this.pictureBox1.Image = PictureChangeSize(qrCodeImage);
         }
     }
 }
