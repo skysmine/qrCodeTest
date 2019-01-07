@@ -15,10 +15,10 @@ namespace qrCodeTest
 {
     public partial class Form1 : Form
     {
-        int preWidth;
-        int preHeight;
-        int preImageWidth;
-        int preImageHeight;
+        //int preWidth;
+        //int preHeight;
+        //int preImageWidth;
+        //int preImageHeight;
 
         Bitmap qrCodeImage;
 
@@ -29,6 +29,29 @@ namespace qrCodeTest
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //preWidth = this.Width;
+            //preHeight = this.Height;
+
+            //preImageHeight = pictureBox1.Height;
+            //preImageWidth = pictureBox1.Width;
+            if (this.Width > this.Height)
+            {
+                pictureBox1.Height = (int)(this.Height * 0.8);
+                pictureBox1.Width = (int)(this.Height * 0.8);
+                //pictureBox1.Location = new Point((int)(this.Height * 0.1), (int)(this.Height * 0.1));
+            }
+            else
+            {
+                pictureBox1.Height = (int)(this.Width * 0.8);
+                pictureBox1.Width = (int)(this.Width * 0.8);
+                //pictureBox1.Location = new Point((int)(this.Width * 0.1), (int)(this.Width * 0.1));
+            }
+            int locationX = (this.Width - pictureBox1.Width) / 2;
+            int locationY = (this.Height - pictureBox1.Height) / 2;
+            pictureBox1.Location = new Point(locationX, locationY);
+
+
+
             String str;
             StreamReader sr = new StreamReader(Application.StartupPath + "\\test.txt", false);
             str = sr.ReadToEnd().ToString();
@@ -82,31 +105,40 @@ namespace qrCodeTest
             return b;
         }
 
-        private void Form1_ResizeBegin(object sender, EventArgs e)
+        private void Form1_SizeChanged(object sender, EventArgs e)
         {
-            preWidth = this.Width;
-            preHeight = this.Height;
+            //float nPercent = 0;
+            //float nPercentW = 0;
+            //float nPercentH = 0;
 
-            preImageHeight = pictureBox1.Height;
-            preImageWidth = pictureBox1.Width;
-        }
+            //nPercentW = (float)this.Width / (float)preWidth;
+            //nPercentH = (float)this.Height / (float)preHeight;
 
-        private void Form1_ResizeEnd(object sender, EventArgs e)
-        {
-            float nPercent = 0;
-            float nPercentW = 0;
-            float nPercentH = 0;
+            //if (nPercentH < nPercentW)
+            //    nPercent = nPercentH;
+            //else
+            //    nPercent = nPercentW;
 
-            nPercentW = (float)this.Width / (float)preWidth;
-            nPercentH = (float)this.Height / (float)preHeight;
+            //pictureBox1.Height = (int)(preHeight * nPercent);
+            //pictureBox1.Width = (int)(preWidth * nPercent);
 
-            if (nPercentH < nPercentW)
-                nPercent = nPercentH;
+            if (this.Width > this.Height)
+            {
+                pictureBox1.Height = (int)(this.Height * 0.8);
+                pictureBox1.Width = (int)(this.Height * 0.8);
+                //pictureBox1.Location = new Point((int)(this.Height * 0.1), (int)(this.Height * 0.1));
+            }
             else
-                nPercent = nPercentW;
+            {
+                pictureBox1.Height = (int)(this.Width * 0.8);
+                pictureBox1.Width = (int)(this.Width * 0.8);
+                //pictureBox1.Location = new Point((int)(this.Width * 0.1), (int)(this.Width * 0.1));
+            }
 
-            pictureBox1.Height = (int)((float)preHeight * nPercent);
-            pictureBox1.Width = (int)((float)preWidth * nPercent);
+
+            int locationX = (this.Width - pictureBox1.Width) / 2;
+            int locationY = (this.Height - pictureBox1.Height) / 2;
+            pictureBox1.Location = new Point(locationX, locationY);
 
             this.pictureBox1.Image = PictureChangeSize(qrCodeImage);
         }
